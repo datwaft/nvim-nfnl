@@ -6,10 +6,10 @@
   (.. plugins-folder "/" plugin))
 
 ;; Add the plugin to the runtimepath and download it if necessary
-(lambda bootstrap [user plugin ?as]
-  (local plugin-path (plugin-path (or ?as plugin)))
+(lambda bootstrap [user plugin ?alias]
+  (local plugin-path (plugin-path (or ?alias plugin)))
   (when (not (vim.loop.fs_stat plugin-path))
-    (vim.notify (string.format "Bootstrapping %s..." (or ?as plugin) vim.log.levels.INFO))
+    (vim.notify (string.format "Bootstrapping %s..." (or ?alias plugin) vim.log.levels.INFO))
     (vim.fn.system ["git"
                     "clone"
                     "--filter=blob:none"
@@ -18,15 +18,14 @@
                     plugin-path]))
   (vim.opt.runtimepath:prepend plugin-path))
 
+;; Bootstrap essential plugins
 (bootstrap "folke" "lazy.nvim")
 (bootstrap "Olical" "nfnl")
 (bootstrap "catppuccin" "nvim" "catppuccin")
 
+;; Set the colorscheme before loading Lazy
 (vim.cmd.colorscheme "catppuccin")
 
-(local plugins ["Olical/nfnl"
-                {1 "catppuccin/nvim"
-                 :name "catppuccin"}])
-
+;; Load Lazy
 (let [lazy (require :lazy)]
-  (lazy.setup plugins))
+  (lazy.setup "conf.plugins"))
