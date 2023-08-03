@@ -22,6 +22,7 @@
 (bootstrap "folke" "lazy.nvim")
 (bootstrap "Olical" "nfnl")
 (bootstrap "catppuccin" "nvim" "catppuccin")
+(bootstrap "datwaft" "themis.nvim")
 
 ;; Set the colorscheme before loading Lazy
 (vim.cmd.colorscheme "catppuccin")

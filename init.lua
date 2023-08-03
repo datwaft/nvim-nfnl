@@ -18,6 +18,7 @@ end
 bootstrap("folke", "lazy.nvim")
 bootstrap("Olical", "nfnl")
 bootstrap("catppuccin", "nvim", "catppuccin")
+bootstrap("datwaft", "themis.nvim")
 vim.cmd.colorscheme("catppuccin")
 local lazy = require("lazy")
 return lazy.setup("conf.plugins")
